@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>WAHYU BUAH - Kasir Modern</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header dengan logo */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            padding: 15px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 2.2em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            margin: 0 15px;
+        }
+
+        .header-emoji {
+            font-size: 3em;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.3));
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.95);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+            background: rgba(0,0,0,0.1);
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+        }
+
+        /* Layout Grid */
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Panel */
+        .panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel h2 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid #2e7d32;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel h2 i {
+            font-size: 1.2em;
+        }
+
+        .panel h3 {
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 1px solid #a5d6a7;
+            color: #1b5e20;
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .info-box::before {
+            content: "💡";
+            font-size: 20px;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+        }
+
+        /* Button */
+        .btn {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1b5e20 0%, #0d3e11 100%);
+            transform: scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #1b5e20 0%, #0d3e11 100%);
+            transform: scale(1.02);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #b71c1c 0%, #8e1a1a 100%);
+            transform: scale(1.02);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #f57c00 0%, #e65100 100%);
+        }
+
+        .btn-reset-produk {
+            background: linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%);
+            color: white;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-reset-produk:hover {
+            background: linear-gradient(135deg, #4a148c 0%, #2a0a4a 100%);
+        }
+
+        /* Grid Buah */
+        .buah-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 15px;
+            max-height: 550px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+
+        .buah-card {
+            background: white;
+            border-radius: 24px;
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .buah-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(46, 125, 50, 0.25);
+            border-color: #2e7d32;
+        }
+
+        .buah-card.selected {
+            border-color: #2e7d32;
+            background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+        }
+
+        .buah-emoji {
+            font-size: 48px;
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.1));
+        }
+
+        .buah-nama {
+            font-weight: 700;
+            color: #1b5e20;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .harga-info {
+            font-size: 13px;
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 12px;
+        }
+
+        .harga-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .stok-badge {
+            background: #2e7d32;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Satuan Select */
+        .satuan-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Table */
+        .table-container {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 20px 0;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1b5e20;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Total Box */
+        .total-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .grand-total {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1b5e20;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Kembalian Box */
+        .kembalian-box {
+            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 2px solid #2e7d32;
+        }
+
+        .kembalian-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* Aksi Group */
+        .aksi-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .buah-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2e7d32;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1b5e20;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quick-actions .btn {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header dengan logo -->
+        <div class="header">
+            <span class="header-emoji">🥭</span>
+            <h1>WAHYU BUAH</h1>
+            <span class="header-emoji">🍍</span>
+        </div>
+        
+        <div class="subtitle">
+            ⚡ Kasir Cepat | Harga Variatif | Stok 100kg ⚡
+        </div>
+        
+        <div class="row">
+            <!-- Panel Kiri: Daftar Buah & Input -->
+            <div class="panel">
+                <h2>
+                    <span>📦</span> MASTER DATA BUAH
+                </h2>
+                
+                <div class="info-box">
+                    Setiap buah punya 3 harga: Per Kilo, 1/2 Kilo, 1/4 Kilo
+                </div>
+                
+                <!-- Form Input Buah Baru -->
+                <h3>
+                    <span>➕</span> TAMBAH BUAH BARU
+                </h3>
+                
+                <div class="form-group">
+                    <label>Nama Buah:</label>
+                    <input type="text" id="namaBuah" placeholder="Contoh: Apel Fuji">
+                </div>
+                
+                <div class="form-group">
+                    <label>Harga Per Kilo (Rp):</label>
+                    <input type="number" id="hargaKilo" placeholder="60000">
+                </div>
+                
+                <div class="form-group">
+                    <label>Harga Setengah Kilo (Rp):</label>
+                    <input type="number" id="hargaSetengah" placeholder="30000">
+                </div>
+                
+                <div class="form-group">
+                    <label>Harga Seperempat Kilo (Rp):</label>
+                    <input type="number" id="hargaSeperempat" placeholder="15000">
+                </div>
+                
+                <div class="form-group">
+                    <label>Stok Awal (kg):</label>
+                    <input type="number" id="stokBuah" placeholder="100" value="100">
+                </div>
+                
+                <button class="btn btn-primary" onclick="tambahBuah()">
+                    <span>➕</span> TAMBAH BUAH
+                </button>
+                
+                <!-- Tombol Reset Produk -->
+                <button class="btn btn-reset-produk" onclick="resetProduk()">
+                    <span>🔄</span> RESET SEMUA PRODUK KE AWAL
+                </button>
+                
+                <!-- Daftar Buah -->
+                <h3 style="margin-top: 25px;">
+                    <span>🍎</span> DAFTAR BUAH TERSEDIA
+                </h3>
+                
+                <div class="buah-grid" id="buahGrid"></div>
+            </div>
+            
+            <!-- Panel Kanan: Transaksi -->
+            <div class="panel">
+                <h2>
+                    <span>🧾</span> TRANSAKSI PENJUALAN
+                </h2>
+                
+                <!-- Pilih Buah -->
+                <div class="form-group">
+                    <label>Pilih Buah:</label>
+                    <select id="pilihBuah" class="form-control">
+                        <option value="">-- Pilih Buah --</option>
+                    </select>
+                </div>
+                
+                <!-- Pilih Satuan -->
+                <div class="form-group">
+                    <label>Pilih Satuan:</label>
+                    <select id="pilihSatuan" class="form-control" onchange="updateHargaSatuan()">
+                        <option value="1">Per Kilo (1 kg)</option>
+                        <option value="0.5">Setengah Kilo (0.5 kg)</option>
+                        <option value="0.25">Seperempat Kilo (0.25 kg)</option>
+                    </select>
+                </div>
+                
+                <!-- Info Harga -->
+                <div class="info-box" id="infoHarga" style="justify-content: center;">
+                    Pilih buah untuk melihat harga
+                </div>
+                
+                <!-- Jumlah -->
+                <div class="form-group">
+                    <label>Jumlah (dalam satuan yang dipilih):</label>
+                    <input type="number" id="jumlahBeli" value="1" min="1">
+                </div>
+                
+                <button class="btn btn-success" onclick="tambahTransaksi()">
+                    <span>🛒</span> TAMBAH KE KERANJANG
+                </button>
+                
+                <!-- Keranjang Belanja -->
+                <h3 style="margin-top: 25px;">
+                    <span>🛍️</span> KERANJANG BELANJA
+                </h3>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Buah</th>
+                                <th>Satuan</th>
+                                <th>Harga</th>
+                                <th>Jml</th>
+                                <th>Subtotal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaksiList"></tbody>
+                    </table>
+                </div>
+                
+                <!-- Total -->
+                <div class="total-box">
+                    <div class="grand-total">
+                        <span>TOTAL:</span>
+                        <span id="total">Rp 0</span>
+                    </div>
+                </div>
+                
+                <!-- Pembayaran -->
+                <h3>
+                    <span>💵</span> PEMBAYARAN
+                </h3>
+                
+                <div class="kembalian-box">
+                    <div class="form-group">
+                        <label>Uang Dibayar:</label>
+                        <input type="number" id="uangBayar" placeholder="Masukkan nominal" oninput="hitungKembalian()">
+                    </div>
+                    
+                    <div class="kembalian-display">
+                        <span>Kembalian:</span>
+                        <span id="kembalian" style="color: #1b5e20;">Rp 0</span>
+                    </div>
+                </div>
+                
+                <!-- Aksi -->
+                <div class="aksi-group">
+                    <button class="btn btn-warning" onclick="resetTransaksi()">
+                        <span>🔄</span> RESET
+                    </button>
+                    <button class="btn btn-success" onclick="selesaiTransaksi()">
+                        <span>✅</span> SELESAI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DATA BUAH DEFAULT (AWAL)
+        const DATA_DEFAULT = [
+            { 
+                id: 1, 
+                nama: 'Apel Fuji', 
+                harga: {
+                    kilo: 60000,
+                    setengah: 30000,
+                    seperempat: 15000
+                },
+                stok: 100,
+                emoji: '🍎'
+            },
+            { 
+                id: 2, 
+                nama: 'Pir Madu', 
+                harga: {
+                    kilo: 40000,
+                    setengah: 20000,
+                    seperempat: 10000
+                },
+                stok: 100,
+                emoji: '🍐'
+            },
+            { 
+                id: 3, 
+                nama: 'Jeruk Santang', 
+                harga: {
+                    kilo: 60000,
+                    setengah: 30000,
+                    seperempat: 15000
+                },
+                stok: 100,
+                emoji: '🍊'
+            },
+            { 
+                id: 4, 
+                nama: 'Jeruk Mandarin', 
+                harga: {
+                    kilo: 50000,
+                    setengah: 25000,
+                    seperempat: 12500
+                },
+                stok: 100,
+                emoji: '🍊'
+            },
+            { 
+                id: 5, 
+                nama: 'Jeruk Medan Besar', 
+                harga: {
+                    kilo: 35000,
+                    setengah: 17500,
+                    seperempat: 8750
+                },
+                stok: 100,
+                emoji: '🍊'
+            },
+            { 
+                id: 6, 
+                nama: 'Jeruk Medan Kecil', 
+                harga: {
+                    kilo: 30000,
+                    setengah: 15000,
+                    seperempat: 7500
+                },
+                stok: 100,
+                emoji: '🍊'
+            },
+            { 
+                id: 7, 
+                nama: 'Salak', 
+                harga: {
+                    kilo: 18000,
+                    setengah: 9000,
+                    seperempat: 4500
+                },
+                stok: 100,
+                emoji: '🫘'
+            },
+            { 
+                id: 8, 
+                nama: 'Anggur Merah', 
+                harga: {
+                    kilo: 120000,
+                    setengah: 60000,
+                    seperempat: 30000
+                },
+                stok: 100,
+                emoji: '🍇'
+            },
+            { 
+                id: 9, 
+                nama: 'Anggur Hijau', 
+                harga: {
+                    kilo: 120000,
+                    setengah: 60000,
+                    seperempat: 30000
+                },
+                stok: 100,
+                emoji: '🍇'
+            },
+            { 
+                id: 10, 
+                nama: 'Buah Naga', 
+                harga: {
+                    kilo: 30000,
+                    setengah: 15000,
+                    seperempat: 7500
+                },
+                stok: 100,
+                emoji: '🐉'
+            },
+            { 
+                id: 11, 
+                nama: 'Alpukat', 
+                harga: {
+                    kilo: 30000,
+                    setengah: 15000,
+                    seperempat: 7500
+                },
+                stok: 100,
+                emoji: '🥑'
+            },
+            { 
+                id: 12, 
+                nama: 'Kelengkeng', 
+                harga: {
+                    kilo: 80000,
+                    setengah: 40000,
+                    seperempat: 20000
+                },
+                stok: 100,
+                emoji: '🍒'
+            },
+            { 
+                id: 13, 
+                nama: 'Semangka', 
+                harga: {
+                    kilo: 15000,
+                    setengah: 7500,
+                    seperempat: 3750
+                },
+                stok: 100,
+                emoji: '🍉'
+            },
+            { 
+                id: 14, 
+                nama: 'Melon', 
+                harga: {
+                    kilo: 20000,
+                    setengah: 10000,
+                    seperempat: 5000
+                },
+                stok: 100,
+                emoji: '🍈'
+            },
+            { 
+                id: 15, 
+                nama: 'Pir Jambu', 
+                harga: {
+                    kilo: 60000,
+                    setengah: 30000,
+                    seperempat: 15000
+                },
+                stok: 100,
+                emoji: '🍐'
+            },
+            { 
+                id: 16, 
+                nama: 'Nanas', 
+                harga: {
+                    kilo: 15000,
+                    setengah: 7500,
+                    seperempat: 3750
+                },
+                stok: 100,
+                emoji: '🍍'
+            }
+        ];
+
+        // Data aktif
+        let produkList = JSON.parse(JSON.stringify(DATA_DEFAULT)); // Deep copy
+        let transaksi = [];
+        let nextId = 17;
+        let filteredProduk = [...produkList];
+
+        // Load data dari localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('produkListVariatif');
+            if (savedData) {
+                produkList = JSON.parse(savedData);
+                nextId = Math.max(...produkList.map(p => p.id)) + 1;
+                filteredProduk = [...produkList];
+            }
+        }
+
+        // Save data ke localStorage
+        function saveData() {
+            localStorage.setItem('produkListVariatif', JSON.stringify(produkList));
+        }
+
+        // RESET PRODUK KE DATA AWAL (FITUR BARU!)
+        function resetProduk() {
+            if (confirm('⚠️ Yakin reset semua produk ke data awal? Semua perubahan stok dan harga akan hilang!')) {
+                // Reset ke data default
+                produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
+                nextId = 17;
+                
+                // Reset transaksi juga
+                transaksi = [];
+                document.getElementById('uangBayar').value = '';
+                
+                // Simpan ke localStorage
+                saveData();
+                
+                // Update tampilan
+                filteredProduk = [...produkList];
+                renderBuah();
+                renderTransaksi();
+                hitungTotal();
+                
+                alert('✅ Semua produk telah direset ke data awal!');
+            }
+        }
+
+        // Format Rupiah
+        function formatRupiah(angka) {
+            return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Render daftar buah
+        function renderBuah() {
+            const grid = document.getElementById('buahGrid');
+            const select = document.getElementById('pilihBuah');
+            
+            grid.innerHTML = '';
+            select.innerHTML = '<option value="">-- Pilih Buah --</option>';
+            
+            produkList.forEach(produk => {
+                // Card view
+                const card = document.createElement('div');
+                card.className = 'buah-card';
+                card.setAttribute('onclick', `pilihBuah(${produk.id})`);
+                card.innerHTML = `
+                    <div class="buah-emoji">${produk.emoji}</div>
+                    <div class="buah-nama">${produk.nama}</div>
+                    <div class="harga-info">
+                        <div class="harga-item">1 kg: Rp ${formatRupiah(produk.harga.kilo)}</div>
+                        <div class="harga-item">½ kg: Rp ${formatRupiah(produk.harga.setengah)}</div>
+                        <div class="harga-item">¼ kg: Rp ${formatRupiah(produk.harga.seperempat)}</div>
+                    </div>
+                    <div class="stok-badge">Stok: ${produk.stok} kg</div>
+                `;
+                grid.appendChild(card);
+                
+                // Select option
+                const option = document.createElement('option');
+                option.value = produk.id;
+                option.textContent = `${produk.nama} (Stok: ${produk.stok} kg)`;
+                select.appendChild(option);
+            });
+        }
+
+        // Pilih buah
+        function pilihBuah(id) {
+            document.getElementById('pilihBuah').value = id;
+            updateHargaSatuan();
+            
+            document.querySelectorAll('.buah-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('selected');
+            }
+        }
+
+        // Update info harga berdasarkan satuan
+        function updateHargaSatuan() {
+            const buahId = parseInt(document.getElementById('pilihBuah').value);
+            const satuan = parseFloat(document.getElementById('pilihSatuan').value);
+            
+            if (!buahId) {
+                document.getElementById('infoHarga').innerHTML = 'Pilih buah untuk melihat harga';
+                return;
+            }
+            
+            const produk = produkList.find(p => p.id === buahId);
+            if (!produk) return;
+            
+            let harga = 0;
+            let satuanText = '';
+            
+            if (satuan === 1) {
+                harga = produk.harga.kilo;
+                satuanText = 'Per Kilo (1 kg)';
+            } else if (satuan === 0.5) {
+                harga = produk.harga.setengah;
+                satuanText = 'Setengah Kilo (0.5 kg)';
+            } else if (satuan === 0.25) {
+                harga = produk.harga.seperempat;
+                satuanText = 'Seperempat Kilo (0.25 kg)';
+            }
+            
+            document.getElementById('infoHarga').innerHTML = `
+                ${produk.nama} - ${satuanText}<br>
+                <strong>Rp ${formatRupiah(harga)}</strong>
+            `;
+        }
+
+        // Tambah buah baru
+        function tambahBuah() {
+            const nama = document.getElementById('namaBuah').value;
+            const hargaKilo = parseInt(document.getElementById('hargaKilo').value);
+            const hargaSetengah = parseInt(document.getElementById('hargaSetengah').value);
+            const hargaSeperempat = parseInt(document.getElementById('hargaSeperempat').value);
+            const stok = parseInt(document.getElementById('stokBuah').value);
+            
+            if (!nama || !hargaKilo || !hargaSetengah || !hargaSeperempat || !stok) {
+                alert('Semua field harus diisi!');
+                return;
+            }
+            
+            produkList.push({
+                id: nextId++,
+                nama: nama,
+                harga: {
+                    kilo: hargaKilo,
+                    setengah: hargaSetengah,
+                    seperempat: hargaSeperempat
+                },
+                stok: stok,
+                emoji: '🍌'
+            });
+            
+            // Reset form
+            document.getElementById('namaBuah').value = '';
+            document.getElementById('hargaKilo').value = '';
+            document.getElementById('hargaSetengah').value = '';
+            document.getElementById('hargaSeperempat').value = '';
+            document.getElementById('stokBuah').value = '100';
+            
+            saveData();
+            renderBuah();
+            alert('Buah berhasil ditambahkan!');
+        }
+
+        // Tambah ke transaksi
+        function tambahTransaksi() {
+            const buahId = parseInt(document.getElementById('pilihBuah').value);
+            const satuan = parseFloat(document.getElementById('pilihSatuan').value);
+            const jumlah = parseInt(document.getElementById('jumlahBeli').value);
+            
+            if (!buahId) {
+                alert('Pilih buah dulu!');
+                return;
+            }
+            
+            if (jumlah <= 0) {
+                alert('Jumlah harus lebih dari 0!');
+                return;
+            }
+            
+            const produk = produkList.find(p => p.id === buahId);
+            
+            // Hitung total kg yang digunakan
+            const totalKg = satuan * jumlah;
+            
+            if (produk.stok < totalKg) {
+                alert(`Stok tidak cukup! Tersedia: ${produk.stok} kg`);
+                return;
+            }
+            
+            // Kurangi stok
+            produk.stok -= totalKg;
+            
+            // Dapatkan harga sesuai satuan
+            let hargaSatuan = 0;
+            let satuanText = '';
+            
+            if (satuan === 1) {
+                hargaSatuan = produk.harga.kilo;
+                satuanText = '1 kg';
+            } else if (satuan === 0.5) {
+                hargaSatuan = produk.harga.setengah;
+                satuanText = '½ kg';
+            } else {
+                hargaSatuan = produk.harga.seperempat;
+                satuanText = '¼ kg';
+            }
+            
+            const subtotal = hargaSatuan * jumlah;
+            
+            transaksi.push({
+                id: produk.id,
+                nama: produk.nama,
+                satuan: satuanText,
+                hargaSatuan: hargaSatuan,
+                jumlah: jumlah,
+                subtotal: subtotal,
+                emoji: produk.emoji
+            });
+            
+            saveData();
+            renderBuah();
+            renderTransaksi();
+            hitungTotal();
+            
+            document.getElementById('jumlahBeli').value = 1;
+        }
+
+        // Render transaksi
+        function renderTransaksi() {
+            const tbody = document.getElementById('transaksiList');
+            tbody.innerHTML = '';
+            
+            if (transaksi.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">🛒 Keranjang kosong</td></tr>';
+                return;
+            }
+            
+            transaksi.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.emoji} ${item.nama}</td>
+                    <td>${item.satuan}</td>
+                    <td>Rp ${formatRupiah(item.hargaSatuan)}</td>
+                    <td>${item.jumlah}</td>
+                    <td>Rp ${formatRupiah(item.subtotal)}</td>
+                    <td><button class="btn btn-danger" style="padding: 8px 12px; font-size: 13px;" onclick="hapusItem(${index})">❌</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Hapus item
+        function hapusItem(index) {
+            const item = transaksi[index];
+            
+            // Hitung total kg yang dikembalikan
+            let kgPerSatuan = 1;
+            if (item.satuan === '½ kg') kgPerSatuan = 0.5;
+            if (item.satuan === '¼ kg') kgPerSatuan = 0.25;
+            
+            const totalKg = kgPerSatuan * item.jumlah;
+            
+            const produk = produkList.find(p => p.id === item.id);
+            if (produk) {
+                produk.stok += totalKg;
+            }
+            
+            transaksi.splice(index, 1);
+            
+            saveData();
+            renderBuah();
+            renderTransaksi();
+            hitungTotal();
+        }
+
+        // Hitung total
+        function hitungTotal() {
+            const total = transaksi.reduce((sum, item) => sum + item.subtotal, 0);
+            document.getElementById('total').innerHTML = `Rp ${formatRupiah(total)}`;
+            hitungKembalian();
+        }
+
+        // Hitung kembalian
+        function hitungKembalian() {
+            const uangBayar = parseInt(document.getElementById('uangBayar').value) || 0;
+            const totalText = document.getElementById('total').innerHTML;
+            const total = parseInt(totalText.replace(/[^0-9]/g, '')) || 0;
+            
+            const kembalian = uangBayar - total;
+            
+            if (uangBayar > 0) {
+                if (kembalian >= 0) {
+                    document.getElementById('kembalian').innerHTML = `Rp ${formatRupiah(kembalian)}`;
+                    document.getElementById('kembalian').style.color = '#1b5e20';
+                } else {
+                    document.getElementById('kembalian').innerHTML = `Kurang Rp ${formatRupiah(Math.abs(kembalian))}`;
+                    document.getElementById('kembalian').style.color = '#d32f2f';
+                }
+            } else {
+                document.getElementById('kembalian').innerHTML = 'Rp 0';
+            }
+        }
+
+        // Reset transaksi
+        function resetTransaksi() {
+            if (transaksi.length > 0 && !confirm('Yakin reset keranjang?')) return;
+            
+            transaksi.forEach(item => {
+                let kgPerSatuan = 1;
+                if (item.satuan === '½ kg') kgPerSatuan = 0.5;
+                if (item.satuan === '¼ kg') kgPerSatuan = 0.25;
+                
+                const totalKg = kgPerSatuan * item.jumlah;
+                const produk = produkList.find(p => p.id === item.id);
+                if (produk) produk.stok += totalKg;
+            });
+            
+            transaksi = [];
+            document.getElementById('uangBayar').value = '';
+            
+            saveData();
+            renderBuah();
+            renderTransaksi();
+            hitungTotal();
+        }
+
+        // Selesai transaksi
+        function selesaiTransaksi() {
+            if (transaksi.length === 0) {
+                alert('Keranjang kosong!');
+                return;
+            }
+            
+            const uangBayar = parseInt(document.getElementById('uangBayar').value);
+            const total = transaksi.reduce((sum, item) => sum + item.subtotal, 0);
+            
+            if (!uangBayar || uangBayar < total) {
+                alert('Uang tidak cukup!');
+                return;
+            }
+            
+            const kembalian = uangBayar - total;
+            
+            // Buat struk
+            let struk = '🥭 WAHYU BUAH 🍍\n';
+            struk += '================================\n';
+            struk += new Date().toLocaleString('id-ID') + '\n';
+            struk += '================================\n\n';
+            
+            transaksi.forEach(item => {
+                struk += `${item.emoji} ${item.nama}\n`;
+                struk += `${item.jumlah} x ${item.satuan} @Rp ${formatRupiah(item.hargaSatuan)} = Rp ${formatRupiah(item.subtotal)}\n`;
+            });
+            
+            struk += '\n================================\n';
+            struk += `TOTAL: Rp ${formatRupiah(total)}\n`;
+            struk += `Bayar: Rp ${formatRupiah(uangBayar)}\n`;
+            struk += `Kembali: Rp ${formatRupiah(kembalian)}\n`;
+            struk += '================================\n';
+            struk += 'Terima Kasih!\n';
+            struk += 'Belanja Lagi Ya!\n';
+            
+            alert(struk);
+            
+            // Reset
+            transaksi = [];
+            document.getElementById('uangBayar').value = '';
+            saveData();
+            renderBuah();
+            renderTransaksi();
+            hitungTotal();
+        }
+
+        // Inisialisasi
+        loadData();
+        renderBuah();
+        renderTransaksi();
+        hitungTotal();
+    </script>
+</body>
+</html>
