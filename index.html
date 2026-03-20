@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>WAHYU BUAH - Kasir Modern</title>
+    <title>WAHYU BUAH - Harga Fleksibel</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,6 @@
             margin: 0 auto;
         }
 
-        /* Header dengan logo */
         .header {
             display: flex;
             align-items: center;
@@ -64,14 +63,12 @@
             width: fit-content;
         }
 
-        /* Layout Grid */
         .row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        /* Panel */
         .panel {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
@@ -97,10 +94,6 @@
             gap: 10px;
         }
 
-        .panel h2 i {
-            font-size: 1.2em;
-        }
-
         .panel h3 {
             color: #2c3e50;
             margin: 25px 0 15px;
@@ -110,7 +103,7 @@
             gap: 8px;
         }
 
-        /* Info Box */
+        /* Info Box dengan icon baru */
         .info-box {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 1px solid #a5d6a7;
@@ -126,11 +119,27 @@
         }
 
         .info-box::before {
-            content: "💡";
+            content: "💰";
             font-size: 20px;
         }
 
-        /* Form Group */
+        /* Info Box khusus harga */
+        .harga-info-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 1px solid #ffb74d;
+            color: #bf360c;
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+
+        .harga-info-box::before {
+            content: "⚡";
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
         .form-group {
             margin-bottom: 18px;
         }
@@ -159,7 +168,21 @@
             box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
         }
 
-        /* Button */
+        /* Input khusus untuk harga fleksibel */
+        .input-fleksibel {
+            background: #fff3e0;
+            border: 2px solid #ff9800 !important;
+            font-weight: 600;
+            font-size: 18px !important;
+        }
+
+        /* Input berat fleksibel */
+        .input-berat {
+            background: #e3f2fd;
+            border: 2px solid #1976d2 !important;
+            font-weight: 600;
+        }
+
         .btn {
             padding: 14px 22px;
             border: none;
@@ -181,31 +204,10 @@
             width: 100%;
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #1b5e20 0%, #0d3e11 100%);
-            transform: scale(1.02);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-        }
-
         .btn-success {
             background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
             color: white;
             width: 100%;
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(135deg, #1b5e20 0%, #0d3e11 100%);
-            transform: scale(1.02);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: linear-gradient(135deg, #b71c1c 0%, #8e1a1a 100%);
-            transform: scale(1.02);
         }
 
         .btn-warning {
@@ -213,8 +215,9 @@
             color: white;
         }
 
-        .btn-warning:hover {
-            background: linear-gradient(135deg, #f57c00 0%, #e65100 100%);
+        .btn-info {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
         }
 
         .btn-reset-produk {
@@ -224,11 +227,6 @@
             margin-top: 15px;
         }
 
-        .btn-reset-produk:hover {
-            background: linear-gradient(135deg, #4a148c 0%, #2a0a4a 100%);
-        }
-
-        /* Grid Buah */
         .buah-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -257,15 +255,13 @@
         }
 
         .buah-card.selected {
-            border-color: #2e7d32;
-            background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
-            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+            border-color: #ff9800;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
         }
 
         .buah-emoji {
             font-size: 48px;
             margin-bottom: 10px;
-            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.1));
         }
 
         .buah-nama {
@@ -299,18 +295,16 @@
             font-weight: 600;
             display: inline-block;
             margin-top: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Satuan Select */
-        .satuan-group {
+        /* Grid untuk input fleksibel */
+        .flex-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 15px;
         }
 
-        /* Table */
         .table-container {
             max-height: 300px;
             overflow-y: auto;
@@ -342,11 +336,6 @@
             font-size: 14px;
         }
 
-        tr:hover {
-            background: #f5f5f5;
-        }
-
-        /* Total Box */
         .total-box {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             padding: 20px;
@@ -363,7 +352,6 @@
             align-items: center;
         }
 
-        /* Kembalian Box */
         .kembalian-box {
             background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
             padding: 20px;
@@ -380,7 +368,6 @@
             font-weight: 700;
         }
 
-        /* Aksi Group */
         .aksi-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -388,9 +375,12 @@
             margin-top: 20px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .row {
+                grid-template-columns: 1fr;
+            }
+            
+            .flex-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -398,51 +388,14 @@
                 font-size: 1.8em;
             }
             
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
             .buah-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #2e7d32;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #1b5e20;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .quick-actions .btn {
-            flex: 1;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header dengan logo -->
         <div class="header">
             <span class="header-emoji">🥭</span>
             <h1>WAHYU BUAH</h1>
@@ -450,18 +403,18 @@
         </div>
         
         <div class="subtitle">
-            ⚡ Kasir Cepat | Harga Variatif | Stok 100kg ⚡
+            ⚡ Harga Fleksibel | Timbangan Akurat | Nego Bebas ⚡
         </div>
         
         <div class="row">
-            <!-- Panel Kiri: Daftar Buah & Input -->
+            <!-- Panel Kiri: Daftar Buah -->
             <div class="panel">
                 <h2>
                     <span>📦</span> MASTER DATA BUAH
                 </h2>
                 
                 <div class="info-box">
-                    Setiap buah punya 3 harga: Per Kilo, 1/2 Kilo, 1/4 Kilo
+                    Harga default per kilo. Bisa diubah manual saat transaksi.
                 </div>
                 
                 <!-- Form Input Buah Baru -->
@@ -475,18 +428,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Harga Per Kilo (Rp):</label>
+                    <label>Harga Per Kilo (Default) Rp:</label>
                     <input type="number" id="hargaKilo" placeholder="60000">
-                </div>
-                
-                <div class="form-group">
-                    <label>Harga Setengah Kilo (Rp):</label>
-                    <input type="number" id="hargaSetengah" placeholder="30000">
-                </div>
-                
-                <div class="form-group">
-                    <label>Harga Seperempat Kilo (Rp):</label>
-                    <input type="number" id="hargaSeperempat" placeholder="15000">
                 </div>
                 
                 <div class="form-group">
@@ -500,7 +443,7 @@
                 
                 <!-- Tombol Reset Produk -->
                 <button class="btn btn-reset-produk" onclick="resetProduk()">
-                    <span>🔄</span> RESET SEMUA PRODUK KE AWAL
+                    <span>🔄</span> RESET SEMUA PRODUK
                 </button>
                 
                 <!-- Daftar Buah -->
@@ -511,43 +454,58 @@
                 <div class="buah-grid" id="buahGrid"></div>
             </div>
             
-            <!-- Panel Kanan: Transaksi -->
+            <!-- Panel Kanan: Transaksi Fleksibel -->
             <div class="panel">
                 <h2>
-                    <span>🧾</span> TRANSAKSI PENJUALAN
+                    <span>🧾</span> TRANSAKSI FLEKSIBEL
                 </h2>
+                
+                <!-- Info Harga Fleksibel -->
+                <div class="harga-info-box">
+                    <strong>🔴 FITUR FLEKSIBEL:</strong> Ubah harga sesuai situasi! Boleh lebih murah/lebih mahal dari harga default.
+                </div>
                 
                 <!-- Pilih Buah -->
                 <div class="form-group">
                     <label>Pilih Buah:</label>
-                    <select id="pilihBuah" class="form-control">
+                    <select id="pilihBuah" class="form-control" onchange="updateHargaDefault()">
                         <option value="">-- Pilih Buah --</option>
                     </select>
                 </div>
                 
-                <!-- Pilih Satuan -->
-                <div class="form-group">
-                    <label>Pilih Satuan:</label>
-                    <select id="pilihSatuan" class="form-control" onchange="updateHargaSatuan()">
-                        <option value="1">Per Kilo (1 kg)</option>
-                        <option value="0.5">Setengah Kilo (0.5 kg)</option>
-                        <option value="0.25">Seperempat Kilo (0.25 kg)</option>
-                    </select>
+                <!-- Input Fleksibel: Harga dan Berat -->
+                <div class="flex-grid">
+                    <!-- Harga Fleksibel -->
+                    <div class="form-group">
+                        <label>💰 Harga Per Kg (Rp):</label>
+                        <input type="number" id="hargaManual" class="input-fleksibel" placeholder="60000" value="60000" step="1000">
+                        <small style="color: #ff9800; display: block; margin-top: 5px;">⏩ Bisa diubah manual</small>
+                    </div>
+                    
+                    <!-- Berat Fleksibel -->
+                    <div class="form-group">
+                        <label>⚖️ Berat (kg):</label>
+                        <input type="number" id="beratManual" class="input-berat" placeholder="1.0" value="1.0" min="0.1" step="0.1">
+                        <small style="color: #1976d2; display: block; margin-top: 5px;">⏩ Bisa desimal (0.1, 1.5, 2.3)</small>
+                    </div>
                 </div>
                 
-                <!-- Info Harga -->
-                <div class="info-box" id="infoHarga" style="justify-content: center;">
-                    Pilih buah untuk melihat harga
+                <!-- Info Harga Saat Ini -->
+                <div class="info-box" id="infoHarga" style="justify-content: space-between;">
+                    <span>💵 Harga default:</span>
+                    <span id="hargaDefaultText">Rp 0</span>
                 </div>
                 
-                <!-- Jumlah -->
-                <div class="form-group">
-                    <label>Jumlah (dalam satuan yang dipilih):</label>
-                    <input type="number" id="jumlahBeli" value="1" min="1">
+                <!-- Total Sementara -->
+                <div class="total-box" style="background: #fff3e0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600;">🔄 Subtotal:</span>
+                        <span id="subtotalSementara" style="font-size: 24px; font-weight: 800; color: #ff9800;">Rp 0</span>
+                    </div>
                 </div>
                 
-                <button class="btn btn-success" onclick="tambahTransaksi()">
-                    <span>🛒</span> TAMBAH KE KERANJANG
+                <button class="btn btn-success" onclick="tambahTransaksiFleksibel()" style="font-size: 16px;">
+                    <span>🛒</span> TAMBAH KE KERANJANG (FLEKSIBEL)
                 </button>
                 
                 <!-- Keranjang Belanja -->
@@ -560,9 +518,8 @@
                         <thead>
                             <tr>
                                 <th>Buah</th>
-                                <th>Satuan</th>
-                                <th>Harga</th>
-                                <th>Jml</th>
+                                <th>Harga/kg</th>
+                                <th>Berat</th>
                                 <th>Subtotal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -605,234 +562,55 @@
                         <span>✅</span> SELESAI
                     </button>
                 </div>
+                
+                <!-- Tombol Reset Harga -->
+                <div style="margin-top: 15px;">
+                    <button class="btn btn-info" onclick="resetKeHargaDefault()" style="width: 100%;">
+                        <span>↩️</span> RESET KE HARGA DEFAULT
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // DATA BUAH DEFAULT (AWAL)
+        // DATA BUAH DEFAULT
         const DATA_DEFAULT = [
-            { 
-                id: 1, 
-                nama: 'Apel Fuji', 
-                harga: {
-                    kilo: 60000,
-                    setengah: 30000,
-                    seperempat: 15000
-                },
-                stok: 100,
-                emoji: '🍎'
-            },
-            { 
-                id: 2, 
-                nama: 'Pir Madu', 
-                harga: {
-                    kilo: 40000,
-                    setengah: 20000,
-                    seperempat: 10000
-                },
-                stok: 100,
-                emoji: '🍐'
-            },
-            { 
-                id: 3, 
-                nama: 'Jeruk Santang', 
-                harga: {
-                    kilo: 60000,
-                    setengah: 30000,
-                    seperempat: 15000
-                },
-                stok: 100,
-                emoji: '🍊'
-            },
-            { 
-                id: 4, 
-                nama: 'Jeruk Mandarin', 
-                harga: {
-                    kilo: 50000,
-                    setengah: 25000,
-                    seperempat: 12500
-                },
-                stok: 100,
-                emoji: '🍊'
-            },
-            { 
-                id: 5, 
-                nama: 'Jeruk Medan Besar', 
-                harga: {
-                    kilo: 35000,
-                    setengah: 17500,
-                    seperempat: 8750
-                },
-                stok: 100,
-                emoji: '🍊'
-            },
-            { 
-                id: 6, 
-                nama: 'Jeruk Medan Kecil', 
-                harga: {
-                    kilo: 30000,
-                    setengah: 15000,
-                    seperempat: 7500
-                },
-                stok: 100,
-                emoji: '🍊'
-            },
-            { 
-                id: 7, 
-                nama: 'Salak', 
-                harga: {
-                    kilo: 18000,
-                    setengah: 9000,
-                    seperempat: 4500
-                },
-                stok: 100,
-                emoji: '🫘'
-            },
-            { 
-                id: 8, 
-                nama: 'Anggur Merah', 
-                harga: {
-                    kilo: 120000,
-                    setengah: 60000,
-                    seperempat: 30000
-                },
-                stok: 100,
-                emoji: '🍇'
-            },
-            { 
-                id: 9, 
-                nama: 'Anggur Hijau', 
-                harga: {
-                    kilo: 120000,
-                    setengah: 60000,
-                    seperempat: 30000
-                },
-                stok: 100,
-                emoji: '🍇'
-            },
-            { 
-                id: 10, 
-                nama: 'Buah Naga', 
-                harga: {
-                    kilo: 30000,
-                    setengah: 15000,
-                    seperempat: 7500
-                },
-                stok: 100,
-                emoji: '🐉'
-            },
-            { 
-                id: 11, 
-                nama: 'Alpukat', 
-                harga: {
-                    kilo: 30000,
-                    setengah: 15000,
-                    seperempat: 7500
-                },
-                stok: 100,
-                emoji: '🥑'
-            },
-            { 
-                id: 12, 
-                nama: 'Kelengkeng', 
-                harga: {
-                    kilo: 80000,
-                    setengah: 40000,
-                    seperempat: 20000
-                },
-                stok: 100,
-                emoji: '🍒'
-            },
-            { 
-                id: 13, 
-                nama: 'Semangka', 
-                harga: {
-                    kilo: 15000,
-                    setengah: 7500,
-                    seperempat: 3750
-                },
-                stok: 100,
-                emoji: '🍉'
-            },
-            { 
-                id: 14, 
-                nama: 'Melon', 
-                harga: {
-                    kilo: 20000,
-                    setengah: 10000,
-                    seperempat: 5000
-                },
-                stok: 100,
-                emoji: '🍈'
-            },
-            { 
-                id: 15, 
-                nama: 'Pir Jambu', 
-                harga: {
-                    kilo: 60000,
-                    setengah: 30000,
-                    seperempat: 15000
-                },
-                stok: 100,
-                emoji: '🍐'
-            },
-            { 
-                id: 16, 
-                nama: 'Nanas', 
-                harga: {
-                    kilo: 15000,
-                    setengah: 7500,
-                    seperempat: 3750
-                },
-                stok: 100,
-                emoji: '🍍'
-            }
+            { id: 1, nama: 'Apel Fuji', hargaKilo: 60000, stok: 100, emoji: '🍎' },
+            { id: 2, nama: 'Pir Madu', hargaKilo: 40000, stok: 100, emoji: '🍐' },
+            { id: 3, nama: 'Jeruk Santang', hargaKilo: 60000, stok: 100, emoji: '🍊' },
+            { id: 4, nama: 'Jeruk Mandarin', hargaKilo: 50000, stok: 100, emoji: '🍊' },
+            { id: 5, nama: 'Jeruk Medan Besar', hargaKilo: 35000, stok: 100, emoji: '🍊' },
+            { id: 6, nama: 'Jeruk Medan Kecil', hargaKilo: 30000, stok: 100, emoji: '🍊' },
+            { id: 7, nama: 'Salak', hargaKilo: 18000, stok: 100, emoji: '🫘' },
+            { id: 8, nama: 'Anggur Merah', hargaKilo: 120000, stok: 100, emoji: '🍇' },
+            { id: 9, nama: 'Anggur Hijau', hargaKilo: 120000, stok: 100, emoji: '🍇' },
+            { id: 10, nama: 'Buah Naga', hargaKilo: 30000, stok: 100, emoji: '🐉' },
+            { id: 11, nama: 'Alpukat', hargaKilo: 30000, stok: 100, emoji: '🥑' },
+            { id: 12, nama: 'Kelengkeng', hargaKilo: 80000, stok: 100, emoji: '🍒' },
+            { id: 13, nama: 'Semangka', hargaKilo: 15000, stok: 100, emoji: '🍉' },
+            { id: 14, nama: 'Melon', hargaKilo: 20000, stok: 100, emoji: '🍈' },
+            { id: 15, nama: 'Pir Jambu', hargaKilo: 60000, stok: 100, emoji: '🍐' },
+            { id: 16, nama: 'Nanas', hargaKilo: 15000, stok: 100, emoji: '🍍' }
         ];
 
         // Data aktif
-        let produkList = JSON.parse(JSON.stringify(DATA_DEFAULT)); // Deep copy
+        let produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
         let transaksi = [];
         let nextId = 17;
-        let filteredProduk = [...produkList];
 
         // Load data dari localStorage
         function loadData() {
-            const savedData = localStorage.getItem('produkListVariatif');
+            const savedData = localStorage.getItem('produkListFleksibel');
             if (savedData) {
                 produkList = JSON.parse(savedData);
                 nextId = Math.max(...produkList.map(p => p.id)) + 1;
-                filteredProduk = [...produkList];
             }
         }
 
         // Save data ke localStorage
         function saveData() {
-            localStorage.setItem('produkListVariatif', JSON.stringify(produkList));
-        }
-
-        // RESET PRODUK KE DATA AWAL (FITUR BARU!)
-        function resetProduk() {
-            if (confirm('⚠️ Yakin reset semua produk ke data awal? Semua perubahan stok dan harga akan hilang!')) {
-                // Reset ke data default
-                produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
-                nextId = 17;
-                
-                // Reset transaksi juga
-                transaksi = [];
-                document.getElementById('uangBayar').value = '';
-                
-                // Simpan ke localStorage
-                saveData();
-                
-                // Update tampilan
-                filteredProduk = [...produkList];
-                renderBuah();
-                renderTransaksi();
-                hitungTotal();
-                
-                alert('✅ Semua produk telah direset ke data awal!');
-            }
+            localStorage.setItem('produkListFleksibel', JSON.stringify(produkList));
         }
 
         // Format Rupiah
@@ -857,9 +635,7 @@
                     <div class="buah-emoji">${produk.emoji}</div>
                     <div class="buah-nama">${produk.nama}</div>
                     <div class="harga-info">
-                        <div class="harga-item">1 kg: Rp ${formatRupiah(produk.harga.kilo)}</div>
-                        <div class="harga-item">½ kg: Rp ${formatRupiah(produk.harga.setengah)}</div>
-                        <div class="harga-item">¼ kg: Rp ${formatRupiah(produk.harga.seperempat)}</div>
+                        <div class="harga-item">Harga/kg: Rp ${formatRupiah(produk.hargaKilo)}</div>
                     </div>
                     <div class="stok-badge">Stok: ${produk.stok} kg</div>
                 `;
@@ -868,7 +644,7 @@
                 // Select option
                 const option = document.createElement('option');
                 option.value = produk.id;
-                option.textContent = `${produk.nama} (Stok: ${produk.stok} kg)`;
+                option.textContent = `${produk.nama} (Rp ${formatRupiah(produk.hargaKilo)}/kg, Stok: ${produk.stok} kg)`;
                 select.appendChild(option);
             });
         }
@@ -876,7 +652,7 @@
         // Pilih buah
         function pilihBuah(id) {
             document.getElementById('pilihBuah').value = id;
-            updateHargaSatuan();
+            updateHargaDefault();
             
             document.querySelectorAll('.buah-card').forEach(card => {
                 card.classList.remove('selected');
@@ -886,138 +662,91 @@
             }
         }
 
-        // Update info harga berdasarkan satuan
-        function updateHargaSatuan() {
+        // Update harga default saat pilih buah
+        function updateHargaDefault() {
             const buahId = parseInt(document.getElementById('pilihBuah').value);
-            const satuan = parseFloat(document.getElementById('pilihSatuan').value);
             
             if (!buahId) {
-                document.getElementById('infoHarga').innerHTML = 'Pilih buah untuk melihat harga';
+                document.getElementById('hargaDefaultText').innerHTML = 'Rp 0';
+                document.getElementById('hargaManual').value = '60000';
                 return;
             }
             
             const produk = produkList.find(p => p.id === buahId);
             if (!produk) return;
             
-            let harga = 0;
-            let satuanText = '';
-            
-            if (satuan === 1) {
-                harga = produk.harga.kilo;
-                satuanText = 'Per Kilo (1 kg)';
-            } else if (satuan === 0.5) {
-                harga = produk.harga.setengah;
-                satuanText = 'Setengah Kilo (0.5 kg)';
-            } else if (satuan === 0.25) {
-                harga = produk.harga.seperempat;
-                satuanText = 'Seperempat Kilo (0.25 kg)';
-            }
-            
-            document.getElementById('infoHarga').innerHTML = `
-                ${produk.nama} - ${satuanText}<br>
-                <strong>Rp ${formatRupiah(harga)}</strong>
-            `;
+            document.getElementById('hargaDefaultText').innerHTML = `Rp ${formatRupiah(produk.hargaKilo)}`;
+            document.getElementById('hargaManual').value = produk.hargaKilo;
+            hitungSubtotal();
         }
 
-        // Tambah buah baru
-        function tambahBuah() {
-            const nama = document.getElementById('namaBuah').value;
-            const hargaKilo = parseInt(document.getElementById('hargaKilo').value);
-            const hargaSetengah = parseInt(document.getElementById('hargaSetengah').value);
-            const hargaSeperempat = parseInt(document.getElementById('hargaSeperempat').value);
-            const stok = parseInt(document.getElementById('stokBuah').value);
+        // Hitung subtotal sementara
+        function hitungSubtotal() {
+            const harga = parseFloat(document.getElementById('hargaManual').value) || 0;
+            const berat = parseFloat(document.getElementById('beratManual').value) || 0;
+            const subtotal = harga * berat;
             
-            if (!nama || !hargaKilo || !hargaSetengah || !hargaSeperempat || !stok) {
-                alert('Semua field harus diisi!');
-                return;
-            }
-            
-            produkList.push({
-                id: nextId++,
-                nama: nama,
-                harga: {
-                    kilo: hargaKilo,
-                    setengah: hargaSetengah,
-                    seperempat: hargaSeperempat
-                },
-                stok: stok,
-                emoji: '🍌'
-            });
-            
-            // Reset form
-            document.getElementById('namaBuah').value = '';
-            document.getElementById('hargaKilo').value = '';
-            document.getElementById('hargaSetengah').value = '';
-            document.getElementById('hargaSeperempat').value = '';
-            document.getElementById('stokBuah').value = '100';
-            
-            saveData();
-            renderBuah();
-            alert('Buah berhasil ditambahkan!');
+            document.getElementById('subtotalSementara').innerHTML = `Rp ${formatRupiah(Math.round(subtotal))}`;
         }
 
-        // Tambah ke transaksi
-        function tambahTransaksi() {
+        // Event listener untuk input harga dan berat
+        document.getElementById('hargaManual').addEventListener('input', hitungSubtotal);
+        document.getElementById('beratManual').addEventListener('input', hitungSubtotal);
+
+        // TAMBAH TRANSAKSI FLEKSIBEL (dengan harga manual)
+        function tambahTransaksiFleksibel() {
             const buahId = parseInt(document.getElementById('pilihBuah').value);
-            const satuan = parseFloat(document.getElementById('pilihSatuan').value);
-            const jumlah = parseInt(document.getElementById('jumlahBeli').value);
+            const hargaManual = parseFloat(document.getElementById('hargaManual').value);
+            const berat = parseFloat(document.getElementById('beratManual').value);
             
             if (!buahId) {
                 alert('Pilih buah dulu!');
                 return;
             }
             
-            if (jumlah <= 0) {
-                alert('Jumlah harus lebih dari 0!');
+            if (berat <= 0) {
+                alert('Berat harus lebih dari 0!');
+                return;
+            }
+            
+            if (hargaManual <= 0) {
+                alert('Harga harus lebih dari 0!');
                 return;
             }
             
             const produk = produkList.find(p => p.id === buahId);
             
-            // Hitung total kg yang digunakan
-            const totalKg = satuan * jumlah;
-            
-            if (produk.stok < totalKg) {
+            // Cek stok
+            if (produk.stok < berat) {
                 alert(`Stok tidak cukup! Tersedia: ${produk.stok} kg`);
                 return;
             }
             
             // Kurangi stok
-            produk.stok -= totalKg;
+            produk.stok -= berat;
             
-            // Dapatkan harga sesuai satuan
-            let hargaSatuan = 0;
-            let satuanText = '';
+            // Hitung subtotal
+            const subtotal = hargaManual * berat;
             
-            if (satuan === 1) {
-                hargaSatuan = produk.harga.kilo;
-                satuanText = '1 kg';
-            } else if (satuan === 0.5) {
-                hargaSatuan = produk.harga.setengah;
-                satuanText = '½ kg';
-            } else {
-                hargaSatuan = produk.harga.seperempat;
-                satuanText = '¼ kg';
-            }
-            
-            const subtotal = hargaSatuan * jumlah;
-            
+            // Tambah ke transaksi
             transaksi.push({
                 id: produk.id,
                 nama: produk.nama,
-                satuan: satuanText,
-                hargaSatuan: hargaSatuan,
-                jumlah: jumlah,
+                hargaPerKg: hargaManual,
+                berat: berat,
                 subtotal: subtotal,
                 emoji: produk.emoji
             });
             
+            // Save & render
             saveData();
             renderBuah();
             renderTransaksi();
             hitungTotal();
             
-            document.getElementById('jumlahBeli').value = 1;
+            // Reset input berat ke 1
+            document.getElementById('beratManual').value = '1.0';
+            hitungSubtotal();
         }
 
         // Render transaksi
@@ -1026,7 +755,7 @@
             tbody.innerHTML = '';
             
             if (transaksi.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 30px;">🛒 Keranjang kosong</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px;">🛒 Keranjang kosong</td></tr>';
                 return;
             }
             
@@ -1034,11 +763,10 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${item.emoji} ${item.nama}</td>
-                    <td>${item.satuan}</td>
-                    <td>Rp ${formatRupiah(item.hargaSatuan)}</td>
-                    <td>${item.jumlah}</td>
-                    <td>Rp ${formatRupiah(item.subtotal)}</td>
-                    <td><button class="btn btn-danger" style="padding: 8px 12px; font-size: 13px;" onclick="hapusItem(${index})">❌</button></td>
+                    <td>Rp ${formatRupiah(item.hargaPerKg)}</td>
+                    <td>${item.berat} kg</td>
+                    <td>Rp ${formatRupiah(Math.round(item.subtotal))}</td>
+                    <td><button class="btn btn-danger" style="padding: 8px 12px;" onclick="hapusItem(${index})">❌</button></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -1048,16 +776,10 @@
         function hapusItem(index) {
             const item = transaksi[index];
             
-            // Hitung total kg yang dikembalikan
-            let kgPerSatuan = 1;
-            if (item.satuan === '½ kg') kgPerSatuan = 0.5;
-            if (item.satuan === '¼ kg') kgPerSatuan = 0.25;
-            
-            const totalKg = kgPerSatuan * item.jumlah;
-            
+            // Kembalikan stok
             const produk = produkList.find(p => p.id === item.id);
             if (produk) {
-                produk.stok += totalKg;
+                produk.stok += item.berat;
             }
             
             transaksi.splice(index, 1);
@@ -1071,28 +793,43 @@
         // Hitung total
         function hitungTotal() {
             const total = transaksi.reduce((sum, item) => sum + item.subtotal, 0);
-            document.getElementById('total').innerHTML = `Rp ${formatRupiah(total)}`;
+            document.getElementById('total').innerHTML = `Rp ${formatRupiah(Math.round(total))}`;
             hitungKembalian();
         }
 
         // Hitung kembalian
         function hitungKembalian() {
-            const uangBayar = parseInt(document.getElementById('uangBayar').value) || 0;
+            const uangBayar = parseFloat(document.getElementById('uangBayar').value) || 0;
             const totalText = document.getElementById('total').innerHTML;
-            const total = parseInt(totalText.replace(/[^0-9]/g, '')) || 0;
+            const total = parseFloat(totalText.replace(/[^0-9]/g, '')) || 0;
             
             const kembalian = uangBayar - total;
             
             if (uangBayar > 0) {
                 if (kembalian >= 0) {
-                    document.getElementById('kembalian').innerHTML = `Rp ${formatRupiah(kembalian)}`;
+                    document.getElementById('kembalian').innerHTML = `Rp ${formatRupiah(Math.round(kembalian))}`;
                     document.getElementById('kembalian').style.color = '#1b5e20';
                 } else {
-                    document.getElementById('kembalian').innerHTML = `Kurang Rp ${formatRupiah(Math.abs(kembalian))}`;
+                    document.getElementById('kembalian').innerHTML = `Kurang Rp ${formatRupiah(Math.abs(Math.round(kembalian)))}`;
                     document.getElementById('kembalian').style.color = '#d32f2f';
                 }
             } else {
                 document.getElementById('kembalian').innerHTML = 'Rp 0';
+            }
+        }
+
+        // Reset ke harga default
+        function resetKeHargaDefault() {
+            const buahId = parseInt(document.getElementById('pilihBuah').value);
+            if (!buahId) {
+                alert('Pilih buah dulu!');
+                return;
+            }
+            
+            const produk = produkList.find(p => p.id === buahId);
+            if (produk) {
+                document.getElementById('hargaManual').value = produk.hargaKilo;
+                hitungSubtotal();
             }
         }
 
@@ -1101,13 +838,8 @@
             if (transaksi.length > 0 && !confirm('Yakin reset keranjang?')) return;
             
             transaksi.forEach(item => {
-                let kgPerSatuan = 1;
-                if (item.satuan === '½ kg') kgPerSatuan = 0.5;
-                if (item.satuan === '¼ kg') kgPerSatuan = 0.25;
-                
-                const totalKg = kgPerSatuan * item.jumlah;
                 const produk = produkList.find(p => p.id === item.id);
-                if (produk) produk.stok += totalKg;
+                if (produk) produk.stok += item.berat;
             });
             
             transaksi = [];
@@ -1119,6 +851,24 @@
             hitungTotal();
         }
 
+        // Reset semua produk ke default
+        function resetProduk() {
+            if (confirm('⚠️ Yakin reset semua produk?')) {
+                produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
+                nextId = 17;
+                
+                transaksi = [];
+                document.getElementById('uangBayar').value = '';
+                
+                saveData();
+                renderBuah();
+                renderTransaksi();
+                hitungTotal();
+                
+                alert('✅ Semua produk telah direset!');
+            }
+        }
+
         // Selesai transaksi
         function selesaiTransaksi() {
             if (transaksi.length === 0) {
@@ -1126,7 +876,7 @@
                 return;
             }
             
-            const uangBayar = parseInt(document.getElementById('uangBayar').value);
+            const uangBayar = parseFloat(document.getElementById('uangBayar').value);
             const total = transaksi.reduce((sum, item) => sum + item.subtotal, 0);
             
             if (!uangBayar || uangBayar < total) {
@@ -1137,23 +887,25 @@
             const kembalian = uangBayar - total;
             
             // Buat struk
-            let struk = '🥭 WAHYU BUAH 🍍\n';
+            let struk = '🥭 WAHYU BUAH (HARGA FLEKSIBEL) 🍍\n';
             struk += '================================\n';
             struk += new Date().toLocaleString('id-ID') + '\n';
             struk += '================================\n\n';
             
             transaksi.forEach(item => {
                 struk += `${item.emoji} ${item.nama}\n`;
-                struk += `${item.jumlah} x ${item.satuan} @Rp ${formatRupiah(item.hargaSatuan)} = Rp ${formatRupiah(item.subtotal)}\n`;
+                struk += `Harga: Rp ${formatRupiah(Math.round(item.hargaPerKg))}/kg\n`;
+                struk += `Berat: ${item.berat} kg\n`;
+                struk += `Subtotal: Rp ${formatRupiah(Math.round(item.subtotal))}\n\n`;
             });
             
-            struk += '\n================================\n';
-            struk += `TOTAL: Rp ${formatRupiah(total)}\n`;
-            struk += `Bayar: Rp ${formatRupiah(uangBayar)}\n`;
-            struk += `Kembali: Rp ${formatRupiah(kembalian)}\n`;
+            struk += '================================\n';
+            struk += `TOTAL: Rp ${formatRupiah(Math.round(total))}\n`;
+            struk += `Bayar: Rp ${formatRupiah(Math.round(uangBayar))}\n`;
+            struk += `Kembali: Rp ${formatRupiah(Math.round(kembalian))}\n`;
             struk += '================================\n';
             struk += 'Terima Kasih!\n';
-            struk += 'Belanja Lagi Ya!\n';
+            struk += 'Harga Fleksibel - Nego Boleh!\n';
             
             alert(struk);
             
@@ -1166,11 +918,41 @@
             hitungTotal();
         }
 
+        // Tambah buah baru
+        function tambahBuah() {
+            const nama = document.getElementById('namaBuah').value;
+            const hargaKilo = parseInt(document.getElementById('hargaKilo').value);
+            const stok = parseInt(document.getElementById('stokBuah').value);
+            
+            if (!nama || !hargaKilo || !stok) {
+                alert('Semua field harus diisi!');
+                return;
+            }
+            
+            produkList.push({
+                id: nextId++,
+                nama: nama,
+                hargaKilo: hargaKilo,
+                stok: stok,
+                emoji: '💰 '
+            });
+            
+            // Reset form
+            document.getElementById('namaBuah').value = '';
+            document.getElementById('hargaKilo').value = '';
+            document.getElementById('stokBuah').value = '100';
+            
+            saveData();
+            renderBuah();
+            alert('Buah berhasil ditambahkan!');
+        }
+
         // Inisialisasi
         loadData();
         renderBuah();
         renderTransaksi();
         hitungTotal();
+        hitungSubtotal();
     </script>
 </body>
 </html>
