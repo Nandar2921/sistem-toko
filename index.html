@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>WAHYU BUAH - Harga Fleksibel</title>
+    <title>WAHYU BUAH - Sistem Kasir + Laporan</title>
     <style>
         * {
             margin: 0;
@@ -63,6 +63,47 @@
             width: fit-content;
         }
 
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            backdrop-filter: blur(5px);
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #1b5e20;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -103,7 +144,41 @@
             gap: 8px;
         }
 
-        /* Info Box dengan icon baru */
+        /* Stat Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #2e7d32;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1b5e20;
+        }
+
+        .stat-sub {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* Info Box */
         .info-box {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 1px solid #a5d6a7;
@@ -118,28 +193,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        .info-box::before {
-            content: "💰";
-            font-size: 20px;
-        }
-
-        /* Info Box khusus harga */
-        .harga-info-box {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            border: 1px solid #ffb74d;
-            color: #bf360c;
-            padding: 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            margin: 15px 0;
-        }
-
-        .harga-info-box::before {
-            content: "⚡";
-            font-size: 20px;
-            margin-right: 10px;
-        }
-
+        /* Form Group */
         .form-group {
             margin-bottom: 18px;
         }
@@ -168,7 +222,7 @@
             box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
         }
 
-        /* Input khusus untuk harga fleksibel */
+        /* Input fleksibel */
         .input-fleksibel {
             background: #fff3e0;
             border: 2px solid #ff9800 !important;
@@ -176,7 +230,6 @@
             font-size: 18px !important;
         }
 
-        /* Input berat fleksibel */
         .input-berat {
             background: #e3f2fd;
             border: 2px solid #1976d2 !important;
@@ -217,6 +270,11 @@
 
         .btn-info {
             background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             color: white;
         }
 
@@ -297,7 +355,7 @@
             margin-top: 12px;
         }
 
-        /* Grid untuk input fleksibel */
+        /* Grid untuk input */
         .flex-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -305,8 +363,9 @@
             margin-bottom: 15px;
         }
 
+        /* Table */
         .table-container {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
             margin: 20px 0;
             border-radius: 20px;
@@ -334,6 +393,10 @@
             padding: 14px;
             border-bottom: 1px solid #e0e0e0;
             font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
         }
 
         .total-box {
@@ -375,6 +438,48 @@
             margin-top: 20px;
         }
 
+        /* Riwayat Transaksi */
+        .riwayat-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2e7d32;
+        }
+
+        .riwayat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .riwayat-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .riwayat-total {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1b5e20;
+        }
+
+        .riwayat-items {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .badge {
+            background: #2e7d32;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+        }
+
         @media (max-width: 768px) {
             .row {
                 grid-template-columns: 1fr;
@@ -391,6 +496,10 @@
             .buah-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -403,24 +512,242 @@
         </div>
         
         <div class="subtitle">
-            ⚡ Harga Fleksibel | Timbangan Akurat | Nego Bebas ⚡
+            ⚡ Kasir Cerdas + Laporan Keuangan Otomatis ⚡
         </div>
-        
-        <div class="row">
-            <!-- Panel Kiri: Daftar Buah -->
-            <div class="panel">
-                <h2>
-                    <span>📦</span> MASTER DATA BUAH
-                </h2>
-                
-                <div class="info-box">
-                    Harga default per kilo. Bisa diubah manual saat transaksi.
+
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('kasir')">🧾 KASIR</button>
+            <button class="tab-btn" onclick="switchTab('laporan')">📊 LAPORAN</button>
+            <button class="tab-btn" onclick="switchTab('riwayat')">📜 RIWAYAT</button>
+            <button class="tab-btn" onclick="switchTab('produk')">📦 PRODUK</button>
+        </div>
+
+        <!-- Tab: KASIR -->
+        <div id="tab-kasir" class="tab-content active">
+            <div class="row">
+                <!-- Panel Kiri: Daftar Buah -->
+                <div class="panel">
+                    <h2>
+                        <span>📦</span> DAFTAR BUAH
+                    </h2>
+                    
+                    <div class="buah-grid" id="buahGrid"></div>
                 </div>
                 
-                <!-- Form Input Buah Baru -->
-                <h3>
-                    <span>➕</span> TAMBAH BUAH BARU
-                </h3>
+                <!-- Panel Kanan: Transaksi -->
+                <div class="panel">
+                    <h2>
+                        <span>🧾</span> TRANSAKSI
+                    </h2>
+                    
+                    <!-- Info Harga Fleksibel -->
+                    <div class="info-box">
+                        <strong>🔄 HARGA & BERAT FLEKSIBEL:</strong> Bisa diubah manual sesuai timbangan!
+                    </div>
+                    
+                    <!-- Pilih Buah -->
+                    <div class="form-group">
+                        <label>Pilih Buah:</label>
+                        <select id="pilihBuah" class="form-control" onchange="updateHargaDefault()">
+                            <option value="">-- Pilih Buah --</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Input Fleksibel -->
+                    <div class="flex-grid">
+                        <div class="form-group">
+                            <label>💰 Harga/kg (Rp):</label>
+                            <input type="number" id="hargaManual" class="input-fleksibel" value="60000" step="1000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>⚖️ Berat (kg):</label>
+                            <input type="number" id="beratManual" class="input-berat" value="1.0" min="0.1" step="0.1">
+                        </div>
+                    </div>
+                    
+                    <!-- Subtotal -->
+                    <div class="total-box" style="background: #fff3e0;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>🔄 SUBTOTAL:</span>
+                            <span id="subtotalSementara" style="font-size: 24px; font-weight: 800; color: #ff9800;">Rp 0</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="tambahTransaksi()">
+                        <span>🛒</span> TAMBAH KE KERANJANG
+                    </button>
+                    
+                    <!-- Keranjang -->
+                    <h3 style="margin-top: 25px;">
+                        <span>🛍️</span> KERANJANG
+                    </h3>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Buah</th>
+                                    <th>Harga</th>
+                                    <th>Berat</th>
+                                    <th>Subtotal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaksiList"></tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Total -->
+                    <div class="total-box">
+                        <div class="grand-total">
+                            <span>TOTAL:</span>
+                            <span id="total">Rp 0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Pembayaran -->
+                    <h3>💵 PEMBAYARAN</h3>
+                    
+                    <div class="kembalian-box">
+                        <div class="form-group">
+                            <label>Uang Dibayar:</label>
+                            <input type="number" id="uangBayar" placeholder="Masukkan nominal" oninput="hitungKembalian()">
+                        </div>
+                        
+                        <div class="kembalian-display">
+                            <span>Kembalian:</span>
+                            <span id="kembalian">Rp 0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Aksi -->
+                    <div class="aksi-group">
+                        <button class="btn btn-warning" onclick="resetTransaksi()">
+                            <span>🔄</span> RESET
+                        </button>
+                        <button class="btn btn-success" onclick="selesaiTransaksi()">
+                            <span>✅</span> SELESAI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: LAPORAN -->
+        <div id="tab-laporan" class="tab-content">
+            <div class="panel">
+                <h2>
+                    <span>📊</span> LAPORAN KEUANGAN
+                </h2>
+                
+                <!-- Statistik -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">💰 OMSET HARI INI</div>
+                        <div class="stat-value" id="omsetHariIni">Rp 0</div>
+                        <div class="stat-sub" id="tanggalHariIni"></div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">📅 OMSET BULAN INI</div>
+                        <div class="stat-value" id="omsetBulanIni">Rp 0</div>
+                        <div class="stat-sub" id="bulanIni"></div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">📆 OMSET TAHUN INI</div>
+                        <div class="stat-value" id="omsetTahunIni">Rp 0</div>
+                        <div class="stat-sub" id="tahunIni"></div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">🔄 TOTAL TRANSAKSI</div>
+                        <div class="stat-value" id="totalTransaksi">0</div>
+                        <div class="stat-sub">Sejak awal</div>
+                    </div>
+                </div>
+                
+                <!-- Rata-rata -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">📊 RATA-RATA HARIAN</div>
+                        <div class="stat-value" id="rataHarian">Rp 0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">📈 TRANSAKSI TERBESAR</div>
+                        <div class="stat-value" id="transaksiTerbesar">Rp 0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">📉 TRANSAKSI TERKECIL</div>
+                        <div class="stat-value" id="transaksiTerkecil">Rp 0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-title">⭐ PRODUK TERLARIS</div>
+                        <div class="stat-value" id="produkTerlaris">-</div>
+                    </div>
+                </div>
+                
+                <!-- Tombol Export -->
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-info" onclick="exportLaporan('hari')" style="flex: 1;">
+                        📅 EXPORT LAPORAN HARI INI
+                    </button>
+                    <button class="btn btn-info" onclick="exportLaporan('bulan')" style="flex: 1;">
+                        📆 EXPORT LAPORAN BULAN INI
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: RIWAYAT -->
+        <div id="tab-riwayat" class="tab-content">
+            <div class="panel">
+                <h2>
+                    <span>📜</span> RIWAYAT TRANSAKSI
+                </h2>
+                
+                <!-- Filter -->
+                <div class="flex-grid">
+                    <div class="form-group">
+                        <label>Filter Tanggal:</label>
+                        <input type="date" id="filterTanggal" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button class="btn btn-info" onclick="filterRiwayat()" style="width: 100%;">
+                            🔍 TAMPILKAN
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Daftar Riwayat -->
+                <div id="riwayatContainer" style="max-height: 500px; overflow-y: auto;">
+                    <!-- Akan diisi JavaScript -->
+                </div>
+                
+                <!-- Tombol Hapus Riwayat -->
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-danger" onclick="hapusSemuaRiwayat()" style="width: 100%;">
+                        🗑️ HAPUS SEMUA RIWAYAT
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: PRODUK -->
+        <div id="tab-produk" class="tab-content">
+            <div class="panel">
+                <h2>
+                    <span>📦</span> MANAJEMEN PRODUK
+                </h2>
+                
+                <!-- Form Tambah Produk -->
+                <h3>➕ TAMBAH PRODUK BARU</h3>
                 
                 <div class="form-group">
                     <label>Nama Buah:</label>
@@ -428,7 +755,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Harga Per Kilo (Default) Rp:</label>
+                    <label>Harga Per Kilo (Rp):</label>
                     <input type="number" id="hargaKilo" placeholder="60000">
                 </div>
                 
@@ -445,135 +772,13 @@
                 <button class="btn btn-reset-produk" onclick="resetProduk()">
                     <span>🔄</span> RESET SEMUA PRODUK
                 </button>
-                
-                <!-- Daftar Buah -->
-                <h3 style="margin-top: 25px;">
-                    <span>🍎</span> DAFTAR BUAH TERSEDIA
-                </h3>
-                
-                <div class="buah-grid" id="buahGrid"></div>
-            </div>
-            
-            <!-- Panel Kanan: Transaksi Fleksibel -->
-            <div class="panel">
-                <h2>
-                    <span>🧾</span> TRANSAKSI FLEKSIBEL
-                </h2>
-                
-                <!-- Info Harga Fleksibel -->
-                <div class="harga-info-box">
-                    <strong>🔴 FITUR FLEKSIBEL:</strong> Ubah harga sesuai situasi! Boleh lebih murah/lebih mahal dari harga default.
-                </div>
-                
-                <!-- Pilih Buah -->
-                <div class="form-group">
-                    <label>Pilih Buah:</label>
-                    <select id="pilihBuah" class="form-control" onchange="updateHargaDefault()">
-                        <option value="">-- Pilih Buah --</option>
-                    </select>
-                </div>
-                
-                <!-- Input Fleksibel: Harga dan Berat -->
-                <div class="flex-grid">
-                    <!-- Harga Fleksibel -->
-                    <div class="form-group">
-                        <label>💰 Harga Per Kg (Rp):</label>
-                        <input type="number" id="hargaManual" class="input-fleksibel" placeholder="60000" value="60000" step="1000">
-                        <small style="color: #ff9800; display: block; margin-top: 5px;">⏩ Bisa diubah manual</small>
-                    </div>
-                    
-                    <!-- Berat Fleksibel -->
-                    <div class="form-group">
-                        <label>⚖️ Berat (kg):</label>
-                        <input type="number" id="beratManual" class="input-berat" placeholder="1.0" value="1.0" min="0.1" step="0.1">
-                        <small style="color: #1976d2; display: block; margin-top: 5px;">⏩ Bisa desimal (0.1, 1.5, 2.3)</small>
-                    </div>
-                </div>
-                
-                <!-- Info Harga Saat Ini -->
-                <div class="info-box" id="infoHarga" style="justify-content: space-between;">
-                    <span>💵 Harga default:</span>
-                    <span id="hargaDefaultText">Rp 0</span>
-                </div>
-                
-                <!-- Total Sementara -->
-                <div class="total-box" style="background: #fff3e0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600;">🔄 Subtotal:</span>
-                        <span id="subtotalSementara" style="font-size: 24px; font-weight: 800; color: #ff9800;">Rp 0</span>
-                    </div>
-                </div>
-                
-                <button class="btn btn-success" onclick="tambahTransaksiFleksibel()" style="font-size: 16px;">
-                    <span>🛒</span> TAMBAH KE KERANJANG (FLEKSIBEL)
-                </button>
-                
-                <!-- Keranjang Belanja -->
-                <h3 style="margin-top: 25px;">
-                    <span>🛍️</span> KERANJANG BELANJA
-                </h3>
-                
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Buah</th>
-                                <th>Harga/kg</th>
-                                <th>Berat</th>
-                                <th>Subtotal</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transaksiList"></tbody>
-                    </table>
-                </div>
-                
-                <!-- Total -->
-                <div class="total-box">
-                    <div class="grand-total">
-                        <span>TOTAL:</span>
-                        <span id="total">Rp 0</span>
-                    </div>
-                </div>
-                
-                <!-- Pembayaran -->
-                <h3>
-                    <span>💵</span> PEMBAYARAN
-                </h3>
-                
-                <div class="kembalian-box">
-                    <div class="form-group">
-                        <label>Uang Dibayar:</label>
-                        <input type="number" id="uangBayar" placeholder="Masukkan nominal" oninput="hitungKembalian()">
-                    </div>
-                    
-                    <div class="kembalian-display">
-                        <span>Kembalian:</span>
-                        <span id="kembalian" style="color: #1b5e20;">Rp 0</span>
-                    </div>
-                </div>
-                
-                <!-- Aksi -->
-                <div class="aksi-group">
-                    <button class="btn btn-warning" onclick="resetTransaksi()">
-                        <span>🔄</span> RESET
-                    </button>
-                    <button class="btn btn-success" onclick="selesaiTransaksi()">
-                        <span>✅</span> SELESAI
-                    </button>
-                </div>
-                
-                <!-- Tombol Reset Harga -->
-                <div style="margin-top: 15px;">
-                    <button class="btn btn-info" onclick="resetKeHargaDefault()" style="width: 100%;">
-                        <span>↩️</span> RESET KE HARGA DEFAULT
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // ==================== DATA STORE ====================
+        
         // DATA BUAH DEFAULT
         const DATA_DEFAULT = [
             { id: 1, nama: 'Apel Fuji', hargaKilo: 60000, stok: 100, emoji: '🍎' },
@@ -597,31 +802,74 @@
         // Data aktif
         let produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
         let transaksi = [];
+        let riwayatTransaksi = []; // Menyimpan semua transaksi yang selesai
         let nextId = 17;
 
         // Load data dari localStorage
         function loadData() {
-            const savedData = localStorage.getItem('produkListFleksibel');
-            if (savedData) {
-                produkList = JSON.parse(savedData);
+            // Load produk
+            const savedProduk = localStorage.getItem('wahyuBuah_produk');
+            if (savedProduk) {
+                produkList = JSON.parse(savedProduk);
                 nextId = Math.max(...produkList.map(p => p.id)) + 1;
+            }
+            
+            // Load riwayat transaksi
+            const savedRiwayat = localStorage.getItem('wahyuBuah_riwayat');
+            if (savedRiwayat) {
+                riwayatTransaksi = JSON.parse(savedRiwayat);
             }
         }
 
         // Save data ke localStorage
         function saveData() {
-            localStorage.setItem('produkListFleksibel', JSON.stringify(produkList));
+            localStorage.setItem('wahyuBuah_produk', JSON.stringify(produkList));
+            localStorage.setItem('wahyuBuah_riwayat', JSON.stringify(riwayatTransaksi));
         }
 
-        // Format Rupiah
+        // ==================== UTILITY ====================
+        
         function formatRupiah(angka) {
             return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
 
-        // Render daftar buah
+        function formatTanggal(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('id-ID', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // ==================== TAB NAVIGATION ====================
+        
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+            
+            // Refresh data sesuai tab
+            if (tab === 'laporan') {
+                updateLaporan();
+            } else if (tab === 'riwayat') {
+                renderRiwayat();
+            }
+        }
+
+        // ==================== PRODUK ====================
+        
         function renderBuah() {
             const grid = document.getElementById('buahGrid');
             const select = document.getElementById('pilihBuah');
+            
+            if (!grid || !select) return;
             
             grid.innerHTML = '';
             select.innerHTML = '<option value="">-- Pilih Buah --</option>';
@@ -635,7 +883,7 @@
                     <div class="buah-emoji">${produk.emoji}</div>
                     <div class="buah-nama">${produk.nama}</div>
                     <div class="harga-info">
-                        <div class="harga-item">Harga/kg: Rp ${formatRupiah(produk.hargaKilo)}</div>
+                        <div class="harga-item">Rp ${formatRupiah(produk.hargaKilo)}/kg</div>
                     </div>
                     <div class="stok-badge">Stok: ${produk.stok} kg</div>
                 `;
@@ -649,7 +897,6 @@
             });
         }
 
-        // Pilih buah
         function pilihBuah(id) {
             document.getElementById('pilihBuah').value = id;
             updateHargaDefault();
@@ -662,12 +909,10 @@
             }
         }
 
-        // Update harga default saat pilih buah
         function updateHargaDefault() {
             const buahId = parseInt(document.getElementById('pilihBuah').value);
             
             if (!buahId) {
-                document.getElementById('hargaDefaultText').innerHTML = 'Rp 0';
                 document.getElementById('hargaManual').value = '60000';
                 return;
             }
@@ -675,12 +920,10 @@
             const produk = produkList.find(p => p.id === buahId);
             if (!produk) return;
             
-            document.getElementById('hargaDefaultText').innerHTML = `Rp ${formatRupiah(produk.hargaKilo)}`;
             document.getElementById('hargaManual').value = produk.hargaKilo;
             hitungSubtotal();
         }
 
-        // Hitung subtotal sementara
         function hitungSubtotal() {
             const harga = parseFloat(document.getElementById('hargaManual').value) || 0;
             const berat = parseFloat(document.getElementById('beratManual').value) || 0;
@@ -689,12 +932,59 @@
             document.getElementById('subtotalSementara').innerHTML = `Rp ${formatRupiah(Math.round(subtotal))}`;
         }
 
-        // Event listener untuk input harga dan berat
-        document.getElementById('hargaManual').addEventListener('input', hitungSubtotal);
-        document.getElementById('beratManual').addEventListener('input', hitungSubtotal);
+        // Event listener
+        document.getElementById('hargaManual')?.addEventListener('input', hitungSubtotal);
+        document.getElementById('beratManual')?.addEventListener('input', hitungSubtotal);
 
-        // TAMBAH TRANSAKSI FLEKSIBEL (dengan harga manual)
-        function tambahTransaksiFleksibel() {
+        function tambahBuah() {
+            const nama = document.getElementById('namaBuah').value;
+            const hargaKilo = parseInt(document.getElementById('hargaKilo').value);
+            const stok = parseInt(document.getElementById('stokBuah').value);
+            
+            if (!nama || !hargaKilo || !stok) {
+                alert('Semua field harus diisi!');
+                return;
+            }
+            
+            produkList.push({
+                id: nextId++,
+                nama: nama,
+                hargaKilo: hargaKilo,
+                stok: stok,
+                emoji: '🍌'
+            });
+            
+            // Reset form
+            document.getElementById('namaBuah').value = '';
+            document.getElementById('hargaKilo').value = '';
+            document.getElementById('stokBuah').value = '100';
+            
+            saveData();
+            renderBuah();
+            alert('Buah berhasil ditambahkan!');
+        }
+
+        function resetProduk() {
+            if (confirm('⚠️ Yakin reset semua produk ke data awal?')) {
+                produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
+                nextId = 17;
+                
+                // Reset transaksi yang sedang berjalan
+                transaksi = [];
+                document.getElementById('uangBayar').value = '';
+                
+                saveData();
+                renderBuah();
+                renderTransaksi();
+                hitungTotal();
+                
+                alert('✅ Semua produk telah direset!');
+            }
+        }
+
+        // ==================== TRANSAKSI ====================
+        
+        function tambahTransaksi() {
             const buahId = parseInt(document.getElementById('pilihBuah').value);
             const hargaManual = parseFloat(document.getElementById('hargaManual').value);
             const berat = parseFloat(document.getElementById('beratManual').value);
@@ -749,9 +1039,10 @@
             hitungSubtotal();
         }
 
-        // Render transaksi
         function renderTransaksi() {
             const tbody = document.getElementById('transaksiList');
+            if (!tbody) return;
+            
             tbody.innerHTML = '';
             
             if (transaksi.length === 0) {
@@ -763,7 +1054,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${item.emoji} ${item.nama}</td>
-                    <td>Rp ${formatRupiah(item.hargaPerKg)}</td>
+                    <td>Rp ${formatRupiah(Math.round(item.hargaPerKg))}</td>
                     <td>${item.berat} kg</td>
                     <td>Rp ${formatRupiah(Math.round(item.subtotal))}</td>
                     <td><button class="btn btn-danger" style="padding: 8px 12px;" onclick="hapusItem(${index})">❌</button></td>
@@ -772,7 +1063,6 @@
             });
         }
 
-        // Hapus item
         function hapusItem(index) {
             const item = transaksi[index];
             
@@ -790,14 +1080,12 @@
             hitungTotal();
         }
 
-        // Hitung total
         function hitungTotal() {
             const total = transaksi.reduce((sum, item) => sum + item.subtotal, 0);
             document.getElementById('total').innerHTML = `Rp ${formatRupiah(Math.round(total))}`;
             hitungKembalian();
         }
 
-        // Hitung kembalian
         function hitungKembalian() {
             const uangBayar = parseFloat(document.getElementById('uangBayar').value) || 0;
             const totalText = document.getElementById('total').innerHTML;
@@ -818,22 +1106,6 @@
             }
         }
 
-        // Reset ke harga default
-        function resetKeHargaDefault() {
-            const buahId = parseInt(document.getElementById('pilihBuah').value);
-            if (!buahId) {
-                alert('Pilih buah dulu!');
-                return;
-            }
-            
-            const produk = produkList.find(p => p.id === buahId);
-            if (produk) {
-                document.getElementById('hargaManual').value = produk.hargaKilo;
-                hitungSubtotal();
-            }
-        }
-
-        // Reset transaksi
         function resetTransaksi() {
             if (transaksi.length > 0 && !confirm('Yakin reset keranjang?')) return;
             
@@ -851,25 +1123,6 @@
             hitungTotal();
         }
 
-        // Reset semua produk ke default
-        function resetProduk() {
-            if (confirm('⚠️ Yakin reset semua produk?')) {
-                produkList = JSON.parse(JSON.stringify(DATA_DEFAULT));
-                nextId = 17;
-                
-                transaksi = [];
-                document.getElementById('uangBayar').value = '';
-                
-                saveData();
-                renderBuah();
-                renderTransaksi();
-                hitungTotal();
-                
-                alert('✅ Semua produk telah direset!');
-            }
-        }
-
-        // Selesai transaksi
         function selesaiTransaksi() {
             if (transaksi.length === 0) {
                 alert('Keranjang kosong!');
@@ -886,17 +1139,27 @@
             
             const kembalian = uangBayar - total;
             
+            // Simpan ke riwayat
+            const transaksiSelesai = {
+                id: Date.now(),
+                tanggal: new Date().toISOString(),
+                items: [...transaksi],
+                total: total,
+                uangBayar: uangBayar,
+                kembalian: kembalian
+            };
+            
+            riwayatTransaksi.push(transaksiSelesai);
+            
             // Buat struk
-            let struk = '🥭 WAHYU BUAH (HARGA FLEKSIBEL) 🍍\n';
+            let struk = '🥭 WAHYU BUAH 🍍\n';
             struk += '================================\n';
-            struk += new Date().toLocaleString('id-ID') + '\n';
+            struk += formatTanggal(Date.now()) + '\n';
             struk += '================================\n\n';
             
             transaksi.forEach(item => {
                 struk += `${item.emoji} ${item.nama}\n`;
-                struk += `Harga: Rp ${formatRupiah(Math.round(item.hargaPerKg))}/kg\n`;
-                struk += `Berat: ${item.berat} kg\n`;
-                struk += `Subtotal: Rp ${formatRupiah(Math.round(item.subtotal))}\n\n`;
+                struk += `${item.berat} kg @ Rp ${formatRupiah(Math.round(item.hargaPerKg))} = Rp ${formatRupiah(Math.round(item.subtotal))}\n\n`;
             });
             
             struk += '================================\n';
@@ -905,54 +1168,237 @@
             struk += `Kembali: Rp ${formatRupiah(Math.round(kembalian))}\n`;
             struk += '================================\n';
             struk += 'Terima Kasih!\n';
-            struk += 'Harga Fleksibel - Nego Boleh!\n';
+            struk += 'Belanja Lagi Ya!\n';
             
             alert(struk);
             
             // Reset
             transaksi = [];
             document.getElementById('uangBayar').value = '';
+            
             saveData();
             renderBuah();
             renderTransaksi();
             hitungTotal();
+            updateLaporan();
         }
 
-        // Tambah buah baru
-        function tambahBuah() {
-            const nama = document.getElementById('namaBuah').value;
-            const hargaKilo = parseInt(document.getElementById('hargaKilo').value);
-            const stok = parseInt(document.getElementById('stokBuah').value);
+        // ==================== LAPORAN ====================
+        
+        function updateLaporan() {
+            const now = new Date();
+            const today = now.toISOString().split('T')[0];
+            const thisMonth = now.getMonth();
+            const thisYear = now.getFullYear();
             
-            if (!nama || !hargaKilo || !stok) {
-                alert('Semua field harus diisi!');
+            // Filter transaksi hari ini
+            const transaksiHariIni = riwayatTransaksi.filter(t => 
+                t.tanggal.split('T')[0] === today
+            );
+            
+            // Filter transaksi bulan ini
+            const transaksiBulanIni = riwayatTransaksi.filter(t => {
+                const date = new Date(t.tanggal);
+                return date.getMonth() === thisMonth && date.getFullYear() === thisYear;
+            });
+            
+            // Filter transaksi tahun ini
+            const transaksiTahunIni = riwayatTransaksi.filter(t => {
+                const date = new Date(t.tanggal);
+                return date.getFullYear() === thisYear;
+            });
+            
+            // Hitung omset
+            const omsetHariIni = transaksiHariIni.reduce((sum, t) => sum + t.total, 0);
+            const omsetBulanIni = transaksiBulanIni.reduce((sum, t) => sum + t.total, 0);
+            const omsetTahunIni = transaksiTahunIni.reduce((sum, t) => sum + t.total, 0);
+            
+            // Update display
+            document.getElementById('omsetHariIni').innerHTML = `Rp ${formatRupiah(Math.round(omsetHariIni))}`;
+            document.getElementById('omsetBulanIni').innerHTML = `Rp ${formatRupiah(Math.round(omsetBulanIni))}`;
+            document.getElementById('omsetTahunIni').innerHTML = `Rp ${formatRupiah(Math.round(omsetTahunIni))}`;
+            
+            document.getElementById('totalTransaksi').innerHTML = riwayatTransaksi.length;
+            
+            document.getElementById('tanggalHariIni').innerHTML = today;
+            document.getElementById('bulanIni').innerHTML = now.toLocaleString('id-ID', { month: 'long', year: 'numeric' });
+            document.getElementById('tahunIni').innerHTML = thisYear;
+            
+            // Rata-rata harian
+            const hariBerdagang = new Set(riwayatTransaksi.map(t => t.tanggal.split('T')[0])).size;
+            const rataHarian = hariBerdagang > 0 ? omsetTahunIni / hariBerdagang : 0;
+            document.getElementById('rataHarian').innerHTML = `Rp ${formatRupiah(Math.round(rataHarian))}`;
+            
+            // Transaksi terbesar & terkecil
+            if (riwayatTransaksi.length > 0) {
+                const totals = riwayatTransaksi.map(t => t.total);
+                document.getElementById('transaksiTerbesar').innerHTML = `Rp ${formatRupiah(Math.round(Math.max(...totals)))}`;
+                document.getElementById('transaksiTerkecil').innerHTML = `Rp ${formatRupiah(Math.round(Math.min(...totals)))}`;
+            }
+            
+            // Produk terlaris
+            const produkCount = {};
+            riwayatTransaksi.forEach(t => {
+                t.items.forEach(item => {
+                    if (!produkCount[item.nama]) produkCount[item.nama] = 0;
+                    produkCount[item.nama] += item.berat;
+                });
+            });
+            
+            let terlaris = '-';
+            let maxBerat = 0;
+            for (const [nama, berat] of Object.entries(produkCount)) {
+                if (berat > maxBerat) {
+                    maxBerat = berat;
+                    terlaris = `${nama} (${berat} kg)`;
+                }
+            }
+            document.getElementById('produkTerlaris').innerHTML = terlaris;
+        }
+
+        function exportLaporan(jenis) {
+            const now = new Date();
+            let data;
+            let judul;
+            
+            if (jenis === 'hari') {
+                const today = now.toISOString().split('T')[0];
+                data = riwayatTransaksi.filter(t => t.tanggal.split('T')[0] === today);
+                judul = `LAPORAN_HARI_${today}`;
+            } else {
+                const bulan = now.toLocaleString('id-ID', { month: 'long' });
+                const tahun = now.getFullYear();
+                data = riwayatTransaksi.filter(t => {
+                    const date = new Date(t.tanggal);
+                    return date.getMonth() === now.getMonth() && date.getFullYear() === tahun;
+                });
+                judul = `LAPORAN_BULAN_${bulan}_${tahun}`;
+            }
+            
+            const total = data.reduce((sum, t) => sum + t.total, 0);
+            
+            let laporan = `${judul}\n`;
+            laporan += '================================\n\n';
+            
+            data.forEach((t, i) => {
+                laporan += `${i+1}. ${formatTanggal(t.tanggal)}\n`;
+                t.items.forEach(item => {
+                    laporan += `   - ${item.nama}: ${item.berat} kg x Rp ${formatRupiah(Math.round(item.hargaPerKg))} = Rp ${formatRupiah(Math.round(item.subtotal))}\n`;
+                });
+                laporan += `   TOTAL: Rp ${formatRupiah(Math.round(t.total))}\n\n`;
+            });
+            
+            laporan += '================================\n';
+            laporan += `TOTAL OMSET: Rp ${formatRupiah(Math.round(total))}\n`;
+            laporan += `JUMLAH TRANSAKSI: ${data.length}\n`;
+            
+            alert(laporan);
+        }
+
+        // ==================== RIWAYAT ====================
+        
+        function renderRiwayat() {
+            const container = document.getElementById('riwayatContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (riwayatTransaksi.length === 0) {
+                container.innerHTML = '<div class="info-box">Belum ada transaksi</div>';
                 return;
             }
             
-            produkList.push({
-                id: nextId++,
-                nama: nama,
-                hargaKilo: hargaKilo,
-                stok: stok,
-                emoji: '💰 '
+            // Urutkan dari terbaru
+            const sorted = [...riwayatTransaksi].reverse();
+            
+            sorted.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'riwayat-item';
+                
+                const itemsList = t.items.map(item => 
+                    `${item.emoji} ${item.nama}: ${item.berat} kg @ Rp ${formatRupiah(Math.round(item.hargaPerKg))}`
+                ).join('<br>');
+                
+                div.innerHTML = `
+                    <div class="riwayat-header">
+                        <span>${formatTanggal(t.tanggal)}</span>
+                        <span class="badge">${t.items.length} item</span>
+                    </div>
+                    <div class="riwayat-detail">
+                        <div class="riwayat-items">${itemsList}</div>
+                        <div class="riwayat-total">Rp ${formatRupiah(Math.round(t.total))}</div>
+                    </div>
+                `;
+                
+                container.appendChild(div);
             });
-            
-            // Reset form
-            document.getElementById('namaBuah').value = '';
-            document.getElementById('hargaKilo').value = '';
-            document.getElementById('stokBuah').value = '100';
-            
-            saveData();
-            renderBuah();
-            alert('Buah berhasil ditambahkan!');
         }
 
-        // Inisialisasi
+        function filterRiwayat() {
+            const tanggal = document.getElementById('filterTanggal').value;
+            const container = document.getElementById('riwayatContainer');
+            
+            if (!tanggal) {
+                renderRiwayat();
+                return;
+            }
+            
+            const filtered = riwayatTransaksi.filter(t => 
+                t.tanggal.split('T')[0] === tanggal
+            );
+            
+            container.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="info-box">Tidak ada transaksi di tanggal ini</div>';
+                return;
+            }
+            
+            filtered.reverse().forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'riwayat-item';
+                
+                const itemsList = t.items.map(item => 
+                    `${item.emoji} ${item.nama}: ${item.berat} kg @ Rp ${formatRupiah(Math.round(item.hargaPerKg))}`
+                ).join('<br>');
+                
+                div.innerHTML = `
+                    <div class="riwayat-header">
+                        <span>${formatTanggal(t.tanggal)}</span>
+                        <span class="badge">${t.items.length} item</span>
+                    </div>
+                    <div class="riwayat-detail">
+                        <div class="riwayat-items">${itemsList}</div>
+                        <div class="riwayat-total">Rp ${formatRupiah(Math.round(t.total))}</div>
+                    </div>
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+
+        function hapusSemuaRiwayat() {
+            if (confirm('⚠️ Yakin hapus semua riwayat transaksi? Data tidak bisa dikembalikan!')) {
+                riwayatTransaksi = [];
+                saveData();
+                renderRiwayat();
+                updateLaporan();
+                alert('✅ Semua riwayat telah dihapus');
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        
+        // Load data
         loadData();
+        
+        // Render semua
         renderBuah();
         renderTransaksi();
         hitungTotal();
         hitungSubtotal();
+        updateLaporan();
+        renderRiwayat();
     </script>
 </body>
 </html>
