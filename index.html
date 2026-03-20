@@ -527,13 +527,23 @@
         <div id="tab-kasir" class="tab-content active">
             <div class="row">
                 <!-- Panel Kiri: Daftar Buah -->
-                <div class="panel">
-                    <h2>
-                        <span>📦</span> DAFTAR BUAH
-                    </h2>
-                    
-                    <div class="buah-grid" id="buahGrid"></div>
-                </div>
+<div class="panel">
+    <h2>
+        <span>📦</span> DAFTAR BUAH
+    </h2>
+    
+    <div class="buah-grid" id="buahGrid"></div>
+    
+    <!-- Tombol Reset Produk -->
+    <button class="btn btn-reset-produk" onclick="resetProduk()" style="margin-top: 20px; width: 100%;">
+        <span>🔄</span> RESET SEMUA PRODUK KE AWAL
+    </button>
+    
+    <!-- Info kecil -->
+    <div style="font-size: 12px; color: #666; text-align: center; margin-top: 10px;">
+        ⚡ Reset akan mengembalikan semua stok ke 100kg dan harga default
+    </div>
+</div>
                 
                 <!-- Panel Kanan: Transaksi -->
                 <div class="panel">
